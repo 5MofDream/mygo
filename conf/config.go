@@ -4,8 +4,12 @@ import (
 	"os"
 	"fmt"
 	"apollo/lib"
+	"io/ioutil"
+	"github.com/smallfish/simpleyaml"
 )
 
+
+const CONFIG_PATH = "conf"
 //config
 type Config interface {
 	Get(key string) string
@@ -14,29 +18,48 @@ type Config interface {
 }
 
 type ConfigImp struct {
-	filenam []string
+	configNode interface{}
 }
 
 var config *ConfigImp
 
 func init() {
+	configFileList:= getConfigFileList()
+	//read file
+	for _ , filename := range configFileList{
+		parseYmlFile(filename)
+	}
+}
+
+func getConfigFileList() []string{
 	basePath, err := os.Getwd()
-	if (err != nil) {
+	if err != nil {
 		panic("get base path error")
 	}
-	confPath := basePath + "/conf"
+	confPath := basePath + "/"+ CONFIG_PATH
 	isPath  := lib.PathExists(confPath)
 	if(isPath == false ){
 		panic(fmt.Sprintf("get error conf path: %v" , confPath))
 	}
-	configFileList := lib.GetAllFileByPath(confPath)
-
-	fmt.Println(basePath)
+	configFileList ,err := lib.GetAllFileByPath(confPath)
+	if err != nil{
+		panic(fmt.Sprintf("get conf file error:%v" , err))
+	}
+	return configFileList
 }
 
-func getConfigFileList(){
-
+func parseYmlFile(filename string)*simpleyaml.Yaml{
+	fileData , err := ioutil.ReadFile(filename)
+	if err!= nil{
+		panic(fmt.Sprintf("read conf file error :%v" ,err ))
+	}
+	yaml,err := simpleyaml.NewYaml(fileData)
+	if err != nil {
+		panic("parse")
+	}
+	return yaml
 }
+
 
 func Conf() *ConfigImp {
 	return config

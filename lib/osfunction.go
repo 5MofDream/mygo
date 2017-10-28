@@ -28,7 +28,7 @@ func FileExists(filename string) (bool) {
 
 func GetAllFileByPath(path string) ([]string, error) {
 	dirList, err := ioutil.ReadDir(path)
-	if (err != nil) {
+	if err != nil {
 		return nil, err
 	}
 	var fileList []string
@@ -36,7 +36,7 @@ func GetAllFileByPath(path string) ([]string, error) {
 		switch mode := v.Mode(); {
 		case mode.IsDir():
 			childFileList, err := GetAllFileByPath(path + "/" + v.Name())
-			if (err != nil) {
+			if err != nil {
 				panic(fmt.Sprintf("get child dir file error:%v", err))
 			}
 			fileList = append(fileList, childFileList...)
