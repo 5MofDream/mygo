@@ -18,7 +18,7 @@ type Config interface {
 }
 
 type ConfigImp struct {
-	configNode interface{}
+	configNode map[string]interface{}
 }
 
 var config *ConfigImp
@@ -27,7 +27,7 @@ func init() {
 	configFileList:= getConfigFileList()
 	//read file
 	for _ , filename := range configFileList{
-		parseYmlFile(filename)
+		config.configNode[filename] = parseYmlFile(filename)
 	}
 }
 
