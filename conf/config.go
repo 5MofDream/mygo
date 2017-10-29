@@ -12,11 +12,11 @@ import (
 //config path name
 const CONFIG_PATH = "conf"
 
-//config
+//config todo 用来抽象代替 moltenCore  conf
 type Config interface {
-	Get(key string) string
-	GetList(key string) []interface{}
-	GetMap(key string) map[string]interface{}
+	Get(key string) (string, error)
+	GetList(key string) ([]interface{}, error)
+	GetMap(key string) (map[interface{}]interface{}, error)
 }
 
 type ConfigImp struct {
@@ -73,4 +73,16 @@ func parseYmlFile(filenameList []string) *simpleyaml.Yaml {
 
 func (ci *ConfigImp) GetYmlNode() *simpleyaml.Yaml {
 	return ci.configNode.(*simpleyaml.Yaml)
+}
+
+func (ci *ConfigImp) Get(key string) (string, error) {
+	return ci.GetYmlNode().Get(key).String()
+}
+
+func (ci *ConfigImp) GetList(key string) ([]interface{}, error) {
+	return ci.GetYmlNode().Get(key).Array()
+}
+
+func (ci *ConfigImp) GetMap(key string) (map[interface{}]interface{}, error){
+	return ci.GetYmlNode().Get(key).Map()
 }
