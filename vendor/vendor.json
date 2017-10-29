@@ -1,0 +1,14 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "ow2j5fF+RPIUl6R6IDK2zHI6YK8=",
+			"path": "github.com/smallfish/simpleyaml",
+			"revision": "a32031077861b1fbdf988d2c0865e98ec832dd4c",
+			"revisionTime": "2017-09-11T01:58:56Z",
+			"tree": true
+		}
+	],
+	"rootPath": "apollo"
+}
