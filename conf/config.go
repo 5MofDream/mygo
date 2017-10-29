@@ -6,10 +6,12 @@ import (
 	"apollo/lib"
 	"io/ioutil"
 	"github.com/smallfish/simpleyaml"
+	"sync"
 )
 
-
+//config path name
 const CONFIG_PATH = "conf"
+
 //config
 type Config interface {
 	Get(key string) string
@@ -18,49 +20,57 @@ type Config interface {
 }
 
 type ConfigImp struct {
-	configNode map[string]interface{}
+	configNode interface{}
 }
 
-var config *ConfigImp
+var apolloConfig *ConfigImp
 
-func init() {
-	configFileList:= getConfigFileList()
-	//read file
-	for _ , filename := range configFileList{
-		config.configNode[filename] = parseYmlFile(filename)
-	}
+var once sync.Once
+
+func Conf() *ConfigImp {
+	once.Do(func() {
+		apolloConfig = &ConfigImp{}
+		configFileList := getConfigFileList()
+		//read file
+		apolloConfig.configNode = parseYmlFile(configFileList)
+	})
+	return apolloConfig
 }
 
-func getConfigFileList() []string{
+func getConfigFileList() []string {
 	basePath, err := os.Getwd()
 	if err != nil {
 		panic("get base path error")
 	}
-	confPath := basePath + "/"+ CONFIG_PATH
-	isPath  := lib.PathExists(confPath)
-	if(isPath == false ){
-		panic(fmt.Sprintf("get error conf path: %v" , confPath))
+	confPath := basePath + "/" + CONFIG_PATH
+	isPath := lib.PathExists(confPath)
+	if (isPath == false ) {
+		panic(fmt.Sprintf("get error conf path: %v", confPath))
 	}
-	configFileList ,err := lib.GetAllFileByPath(confPath)
-	if err != nil{
-		panic(fmt.Sprintf("get conf file error:%v" , err))
+	configFileList, err := lib.GetAllFileByPath(confPath)
+	if err != nil {
+		panic(fmt.Sprintf("get conf file error:%v", err))
 	}
 	return configFileList
 }
 
-func parseYmlFile(filename string)*simpleyaml.Yaml{
-	fileData , err := ioutil.ReadFile(filename)
-	if err!= nil{
-		panic(fmt.Sprintf("read conf file error :%v" ,err ))
+func parseYmlFile(filenameList []string) *simpleyaml.Yaml {
+	var fileData []byte
+	for _, filename := range filenameList {
+		tmpFileData, err := ioutil.ReadFile(filename)
+		if err != nil {
+			panic(fmt.Sprintf("read conf file error :%v", err))
+		}
+		fileData = append(fileData, tmpFileData...)
 	}
-	yaml,err := simpleyaml.NewYaml(fileData)
+
+	yaml, err := simpleyaml.NewYaml(fileData)
 	if err != nil {
 		panic("parse")
 	}
 	return yaml
 }
 
-
-func Conf() *ConfigImp {
-	return config
+func (ci *ConfigImp) GetYmlNode() *simpleyaml.Yaml {
+	return ci.configNode.(*simpleyaml.Yaml)
 }
