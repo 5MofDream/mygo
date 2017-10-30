@@ -8,7 +8,7 @@ import (
 //core struct
 type moltenCore struct {
 	appName    string
-	conf       *conf.ConfigImp //default conf
+	conf       *conf.Config //default conf yml config
 	httpServer interface{}     // default gin
 	rpcServer  interface{}     //default rpcx
 	rpcClient  interface{}     //default rpcx
@@ -18,27 +18,28 @@ var once sync.Once
 
 var mc *moltenCore
 
+// init one mc
 func init() {
-	initMoltenCore()
+	once.Do(func() {
+		mc = new(moltenCore)
+		mc.InitMonltenCore(conf.Conf())
+	})
 }
 
+// init mc
+func ( mc *moltenCore)InitMonltenCore(cc *conf.Config){
+	mc.RegisterConf(cc)
+}
 //get
 func Moltencore() *moltenCore {
 	return mc
 }
 
-func initMoltenCore() {
-	once.Do(func() {
-		mc = new(moltenCore)
-		mc.setConf()
-	})
-}
-
-func (mc *moltenCore) setConf() {
-	mc.conf = conf.Conf()
+func (mc *moltenCore) RegisterConf(cc *conf.Config) {
+	mc.conf = cc
 }
 
 //
-func Eruption() {
+func fire() {
 
 }

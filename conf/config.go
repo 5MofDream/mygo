@@ -12,7 +12,7 @@ import (
 //config path name
 const CONFIG_PATH = "conf"
 
-//config todo 用来抽象代替 moltenCore  conf
+//config
 type Config interface {
 	Get(key string) (string, error)
 	GetList(key string) ([]interface{}, error)
@@ -20,21 +20,23 @@ type Config interface {
 }
 
 type ConfigImp struct {
-	configNode interface{}
+	configNode *simpleyaml.Yaml
 }
+
+var config Config
 
 var apolloConfig *ConfigImp
 
 var once sync.Once
 
-func Conf() *ConfigImp {
+func Conf() *Config {
 	once.Do(func() {
 		apolloConfig = &ConfigImp{}
 		configFileList := getConfigFileList()
-		//read file
 		apolloConfig.configNode = parseYmlFile(configFileList)
+		config = apolloConfig
 	})
-	return apolloConfig
+	return &config
 }
 
 func getConfigFileList() []string {
@@ -72,7 +74,7 @@ func parseYmlFile(filenameList []string) *simpleyaml.Yaml {
 }
 
 func (ci *ConfigImp) GetYmlNode() *simpleyaml.Yaml {
-	return ci.configNode.(*simpleyaml.Yaml)
+	return ci.configNode
 }
 
 func (ci *ConfigImp) Get(key string) (string, error) {
