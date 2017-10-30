@@ -25,13 +25,12 @@ func init() {
 func InitServer() {
 	once.Do(func(){
 		apolloHttpServer = & HttpServerImp{}
-		apolloHttpServer.server = gin.Default()//todo use New() to replace after know
-
 	})
 }
 
 func initGinHttpServer(){
-
+	apolloHttpServer.server = gin.Default()//todo use New() to replace after know
+	//获取路由的
 }
 
 func Server()*HttpServer{

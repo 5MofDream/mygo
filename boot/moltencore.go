@@ -25,18 +25,26 @@ func init() {
 		mc.InitMonltenCore(conf.Conf())
 	})
 }
-
-// init mc
-func ( mc *moltenCore)InitMonltenCore(cc *conf.Config){
-	mc.RegisterConf(cc)
-}
 //get
 func Moltencore() *moltenCore {
 	return mc
 }
 
+// init mc
+func ( mc *moltenCore)InitMonltenCore(cc *conf.Config){
+	mc.RegisterConf(cc)
+}
+
 func (mc *moltenCore) RegisterConf(cc *conf.Config) {
 	mc.conf = cc
+}
+
+func (mc *moltenCore) YamlConf()(cc *conf.ConfigImp) {
+	 cci,err := (*mc.conf).(*conf.ConfigImp)
+	 if err != nil{
+	 	panic()
+	 }
+	 return cci
 }
 
 //
