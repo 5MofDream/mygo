@@ -6,6 +6,7 @@ import (
 )
 
 type HttpServer interface {
+	Run()(interface{})
 }
 
 type HttpServerImp struct {
@@ -25,14 +26,24 @@ func init() {
 func InitServer() {
 	once.Do(func(){
 		apolloHttpServer = & HttpServerImp{}
+		initGinHttpServer()
 	})
 }
 
 func initGinHttpServer(){
 	apolloHttpServer.server = gin.Default()//todo use New() to replace after know
-	//获取路由的
 }
 
 func Server()*HttpServer{
 	return &httpServer
+}
+
+
+
+func (hs *HttpServerImp)Server()*gin.Engine{
+	return hs.server
+}
+
+func (hs *HttpServerImp)Run(addr ...string)error{
+	return hs.server.Run(addr...)
 }
