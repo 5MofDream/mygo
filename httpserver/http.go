@@ -6,7 +6,7 @@ import (
 )
 
 type HttpServer interface {
-	Run()(interface{})
+	Run(addr ...string)(error)
 }
 
 type HttpServerImp struct {
@@ -26,11 +26,12 @@ func init() {
 func InitServer() {
 	once.Do(func(){
 		apolloHttpServer = & HttpServerImp{}
-		initGinHttpServer()
+		apolloHttpServer.initGinHttpServer()
+		httpServer = apolloHttpServer
 	})
 }
 
-func initGinHttpServer(){
+func (hs *HttpServerImp)initGinHttpServer(){
 	apolloHttpServer.server = gin.Default()//todo use New() to replace after know
 }
 

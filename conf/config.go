@@ -10,7 +10,7 @@ import (
 )
 
 //config path name
-const CONFIG_PATH = "conf"
+const CONFIG_PATH = "config"
 
 //config
 type Config interface {
