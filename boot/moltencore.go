@@ -5,6 +5,7 @@ import (
 	"sync"
 	"apollo/httpserver"
 	"apollo/lib"
+	"fmt"
 )
 
 //core struct
@@ -71,11 +72,25 @@ func (mc *moltenCore) HttpRun(addr ...string) error {
 //start
 func (mc *moltenCore) Fire() {
 	var err error
-	host, err := mc.YamlConf().Get("http_server_host")
-	lib.PanicError(err)
-	port, err := mc.YamlConf().Get("http_server_port")
-	lib.PanicError(err)
+	//http server
+	host, errHost := mc.YamlConf().Get("http_server_host")
+	port, errPort := mc.YamlConf().Get("http_server_port")
 	addr := host + ":" + port
-	err = mc.HttpRun(addr)
-	lib.PanicError(err)
+	if(errHost == nil && errPort==nil){
+		fmt.Println("start")
+		go func(){
+			fmt.Println("start")
+			err = mc.HttpRun(addr)
+			lib.PanicError(err)
+			fmt.Println("end")
+		}()
+	}
+	//rpc server
+
+	//cli
+
+	
+	xaaa  := make(chan string)
+	<- xaaa
+
 }
