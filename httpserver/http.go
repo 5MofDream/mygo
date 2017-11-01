@@ -31,15 +31,15 @@ func InitServer() {
 	})
 }
 
-func (hs *HttpServerImp)initGinHttpServer(){
-	apolloHttpServer.server = gin.Default()//todo use New() to replace after know
-}
+
 
 func Server()*HttpServer{
 	return &httpServer
 }
 
-
+func (hs *HttpServerImp)initGinHttpServer(){
+	apolloHttpServer.server = gin.Default()//todo use New() to replace after know
+}
 
 func (hs *HttpServerImp)Server()*gin.Engine{
 	return hs.server

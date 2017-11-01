@@ -1,6 +1,55 @@
 package rpcserver
 
+import (
+	"github.com/smallnest/rpcx/server"
+	"sync"
+)
 
-type rpcServer interface{
+type RpcServer interface{
+	RegisterNode(name string , obj interface{} ,metadata string)error
+	Server(network string , addr string)error
+}
 
+
+type RpcServerImp struct {
+	server *server.Server
+}
+
+
+
+var once sync.Once
+
+
+var rpcServer RpcServer
+
+
+var apolloRpcServer * RpcServerImp
+
+func init(){
+	InitServer()
+}
+
+func InitServer(){
+	once.Do(func(){
+		apolloRpcServer = new(RpcServerImp)
+		apolloRpcServer.initRpcxServer()
+		rpcServer = apolloRpcServer
+	})
+}
+
+//init rpcx
+func (rs *RpcServerImp)initRpcxServer(){
+	rs.server = new(server.Server)
+}
+
+func  Instance()*RpcServer{
+	return &rpcServer
+}
+
+func (rs *RpcServerImp)Server(network string , addr string)error{
+	return rs.server.Serve(network , addr)
+}
+
+func (rs *RpcServerImp)RegisterNode(name string , obj interface{} ,metadata string)error{
+	return rs.server.RegisterName(name , obj , metadata)
 }

@@ -58,17 +58,19 @@ func getConfigFileList() []string {
 
 func parseYmlFile(filenameList []string) *simpleyaml.Yaml {
 	var fileData []byte
+	//os.Exit(1231)
 	for _, filename := range filenameList {
 		tmpFileData, err := ioutil.ReadFile(filename)
 		if err != nil {
 			panic(fmt.Sprintf("read conf file error :%v", err))
 		}
+		tmpFileData = []byte(string(tmpFileData)+"\n")
 		fileData = append(fileData, tmpFileData...)
 	}
 
 	yaml, err := simpleyaml.NewYaml(fileData)
 	if err != nil {
-		panic("parse")
+		panic(fmt.Sprintf("parse config error: %v" ,err ))
 	}
 	return yaml
 }
@@ -85,6 +87,6 @@ func (ci *ConfigImp) GetList(key string) ([]interface{}, error) {
 	return ci.GetYmlNode().Get(key).Array()
 }
 
-func (ci *ConfigImp) GetMap(key string) (map[interface{}]interface{}, error){
+func (ci *ConfigImp) GetMap(key string) (map[interface{}]interface{}, error) {
 	return ci.GetYmlNode().Get(key).Map()
 }

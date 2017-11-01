@@ -1,0 +1,2 @@
+rpc_server_network: "tcp"
+rpc_server_addr: "localhost:8972"

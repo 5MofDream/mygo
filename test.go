@@ -2,9 +2,10 @@ package main
 
 import (
 	_ "apollo/router"
-	"apollo/boot"
+	"apollo/moltencore"
+	_ "apollo/rpcrouter"
 )
 
-func main(){
-	boot.Moltencore().Fire()
+func main() {
+	moltencore.Moltencore().Fire()
 }
