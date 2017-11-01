@@ -13,7 +13,7 @@ import (
 var config *conf.ConfigImp
 
 func init() {
-	moltencore.Moltencore().YamlConf()
+	config = moltencore.Moltencore().YamlConf()
 }
 
 //client example
