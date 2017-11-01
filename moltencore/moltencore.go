@@ -6,6 +6,7 @@ import (
 	"apollo/httpserver"
 	"apollo/lib"
 	"apollo/rpcserver"
+	"flag"
 )
 
 //core struct
@@ -14,7 +15,7 @@ type moltenCore struct {
 	conf       *conf.Config           //default conf yml config
 	httpServer *httpserver.HttpServer // default gin
 	rpcServer  *rpcserver.RpcServer   //default rpcx
-	rpcClient  interface{}            //default rpcx
+	container map[string]interface{}  //base container
 }
 
 var once sync.Once
@@ -93,8 +94,14 @@ func (mc *moltenCore) RpcServerRun(network string, addr string) error {
 	return (*mc.rpcServer).Server(network, addr)
 }
 
+//cli flag
+var (
+
+)
 //start
 func (mc *moltenCore) Fire() {
+
+	flag.Parse()
 	var err error
 	//http server
 	host, errHost := mc.YamlConf().Get("http_server_host")
@@ -115,6 +122,7 @@ func (mc *moltenCore) Fire() {
 			mc.RpcServerRun(rpcNetwork, rpcAddr)
 		}()
 	}
+
 	//cli
 
 	xaaa := make(chan string)

@@ -11,6 +11,6 @@ It is a  golang framework,Has rpc,http,tcp,queue...many widget!
 
     查看依赖状态 govender status
 
-    下载依赖 goverder update
+    下载依赖 goverder sync
 
-    添加了非github的依赖需要添加 .gitignore 内容
+    

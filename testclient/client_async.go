@@ -7,6 +7,8 @@ import (
 
 	example "apollo/rpcnodes"
 	"github.com/smallnest/rpcx/client"
+	"fmt"
+	"os"
 )
 
 var (
@@ -16,6 +18,8 @@ var (
 func main() {
 	flag.Parse()
 
+	fmt.Println(*addr2)
+	os.Exit(123)
 	d := client.NewPeer2PeerDiscovery("tcp@"+*addr2, "")
 	xclient := client.NewXClient("Arith", "Mul", client.Failtry, client.RandomSelect, d, client.DefaultOption)
 	defer xclient.Close()
