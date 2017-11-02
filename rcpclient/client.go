@@ -17,7 +17,7 @@ func init() {
 }
 
 //client example
-func exampleArithMul(a int ,b int) int {
+func ExampleArithMul(a int ,b int) int {
 	addr2, error := config.Get("example_cli_arith")
 	lib.PanicError(error)
 	d := client.NewPeer2PeerDiscovery("tcp@"+addr2, "")

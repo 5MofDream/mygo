@@ -8,6 +8,5 @@ import (
 )
 
 func main() {
-
 	moltencore.Moltencore().Fire()
 }
