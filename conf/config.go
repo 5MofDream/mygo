@@ -58,7 +58,6 @@ func getConfigFileList() []string {
 
 func parseYmlFile(filenameList []string) *simpleyaml.Yaml {
 	var fileData []byte
-	//os.Exit(1231)
 	for _, filename := range filenameList {
 		tmpFileData, err := ioutil.ReadFile(filename)
 		if err != nil {
