@@ -177,6 +177,24 @@
 			"versionExact": "v1.2"
 		},
 		{
+			"checksumSHA1": "YkpuNhq75eI7X98jjtYh5gfsnts=",
+			"path": "github.com/go-xorm/builder",
+			"revision": "a4a881a4e552fcb5473f39e8b9f7d9f3457a7fb0",
+			"revisionTime": "2017-10-30T02:14:29Z"
+		},
+		{
+			"checksumSHA1": "LUMu2LdkPXW7fbBccH0i5V4WHYI=",
+			"path": "github.com/go-xorm/core",
+			"revision": "7cd4078f0b35ac497ec3cf1b8caf3327f0d38440",
+			"revisionTime": "2017-11-06T06:23:03Z"
+		},
+		{
+			"checksumSHA1": "PVxQBV6jM2OmRv2YC8NClDIVJaI=",
+			"path": "github.com/go-xorm/xorm",
+			"revision": "a620571388c685fde76f4dda04dfd840196262e4",
+			"revisionTime": "2017-11-01T00:41:20Z"
+		},
+		{
 			"checksumSHA1": "wn2shNJMwRZpvuvkf1s7h0wvqHI=",
 			"path": "github.com/gogo/protobuf/proto",
 			"revision": "616a82ed12d78d24d4839363e8f3c5d3f20627cf",
