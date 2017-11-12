@@ -15,7 +15,7 @@ type moltenCore struct {
 	conf       *conf.Config           //default conf yml config
 	httpServer *httpserver.HttpServer // default gin
 	rpcServer  *rpcserver.RpcServer   //default rpcx
-	container map[string]interface{}  //base container
+	container  *lib.Container         //base container
 }
 
 var once sync.Once
@@ -57,6 +57,7 @@ func (mc *moltenCore) YamlConf() (cc *conf.ConfigImp) {
 //init mc http
 func (mc *moltenCore) RegisterHttp(hs *httpserver.HttpServer) {
 	mc.httpServer = hs
+	mc.bindHttpContainer()
 }
 
 func (mc *moltenCore) GinServer() (*httpserver.HttpServerImp) {
@@ -66,6 +67,23 @@ func (mc *moltenCore) GinServer() (*httpserver.HttpServerImp) {
 	}
 	return gs
 }
+
+//todo 抽象一个interface 暂时使用httpServerImp
+func (mc *moltenCore) bindHttpContainer() {
+	configNode := new(lib.BindNode)
+	configNode.Fill("config", mc.conf, nil, true, false)
+	bindRet := (*mc.httpServer).(*httpserver.HttpServerImp).Bind("config", configNode)
+	if bindRet == false {
+		panic("bind http container config error")
+	}
+	sysB := new(SysBinder)
+	sysB.Bind((*mc.httpServer).(*httpserver.HttpServerImp).Container())
+}
+
+func (mc *moltenCore)bindBaseContainer(){
+
+}
+
 
 func (mc *moltenCore) HttpRun(addr ...string) error {
 	return (*mc.httpServer).Run(addr...)
@@ -95,9 +113,7 @@ func (mc *moltenCore) RpcServerRun(network string, addr string) error {
 }
 
 //cli flag
-var (
-
-)
+var ()
 //start
 func (mc *moltenCore) Fire() {
 

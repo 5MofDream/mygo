@@ -1,10 +1,9 @@
 package main
 
 import (
-	_ "apollo/router"
 	"apollo/moltencore"
+	_ "apollo/router"
 	_ "apollo/rpcrouter"
-
 )
 
 func main() {

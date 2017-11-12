@@ -1,4 +1,4 @@
-package rcpclient
+package rpclient
 
 import (
 	"context"
@@ -21,7 +21,7 @@ func ExampleArithMul(a int ,b int) int {
 	addr2, error := config.Get("example_cli_arith")
 	lib.PanicError(error)
 	d := client.NewPeer2PeerDiscovery("tcp@"+addr2, "")
-	xclient := client.NewXClient("Arith", "Mul", client.Failtry, client.RandomSelect, d, client.DefaultOption)
+	xclient := client.NewXClient("Arith",  client.Failtry, client.RandomSelect, d, client.DefaultOption)//"Mul",
 	defer xclient.Close()
 	//args := &example.Args{
 	//	A: 10,
@@ -32,7 +32,7 @@ func ExampleArithMul(a int ,b int) int {
 		B: b,
 	}
 	reply := &example.Reply{}
-	call, err := xclient.Go(context.Background(), args, reply, nil)
+	call, err := xclient.Go(context.Background(),"Mul", args, reply, nil)
 	if err != nil {
 		log.Fatalf("failed to call: %v", err)
 	}
