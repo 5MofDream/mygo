@@ -3,9 +3,9 @@ package moltencore
 import (
 	"apollo/lib"
 	"apollo/conf"
-	"github.com/go-xorm/xorm"
-	_ "github.com/go-sql-driver/mysql"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"fmt"
+	"github.com/jinzhu/gorm"
 )
 
 type Binder interface {
@@ -31,7 +31,7 @@ func bindMasterDB(c *lib.Container) {
 	httpDatabase, err := conf.GetMap("http_database")
 	if err == nil {
 		dsn := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8", httpDatabase["username"].(string), httpDatabase["password"].(string), httpDatabase["host"].(string), httpDatabase["port"].(string), httpDatabase["dbname"].(string))
-		engine, err := xorm.NewEngine(httpDatabase["driver"].(string), dsn)
+		engine, err := gorm.Open(httpDatabase["driver"].(string), dsn)
 		if err != nil {
 			panic(fmt.Sprintf("connect http db err database: %v ,dsn :%v , err:%v", httpDatabase, dsn, err))
 		}

@@ -28,8 +28,6 @@ func (c *Container) Bind(abstract string, instance *BindNode) bool {
 	c.locker.Lock()
 	defer c.locker.Unlock()
 	if _, ok := c.bindList[abstract]; ok == false {
-		//fmt.Println(abstract , instance)
-		//os.Exit(111)
 		c.bindList[abstract] = instance
 		return true
 	} else {

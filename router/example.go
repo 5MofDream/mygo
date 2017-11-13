@@ -3,7 +3,7 @@ package router
 import (
 	"github.com/gin-gonic/gin"
 	"apollo/moltencore"
-	"apollo/app"
+	"apollo/app/controller"
 )
 
 func init() {
@@ -14,9 +14,8 @@ func init() {
 			"message": "pong",
 		})
 	})
-	hb := app.HttpBase{}
+	hb := controller.ExampleController{}
 	hb.DI()
-	server.GET("/base" , hb.Example)
-
+	server.GET("/example", hb.Example)
 
 }
