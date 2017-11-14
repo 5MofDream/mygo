@@ -81,7 +81,26 @@ func (mc *moltenCore) bindHttpContainer() {
 }
 
 func (mc *moltenCore)bindBaseContainer(){
+	configNode := new(lib.BindNode)
+	configNode.Fill("config", mc.conf, nil, true, false)
+	bindRet := mc.container.Bind("config", configNode)
+	if bindRet == false {
+		panic("bind base container config error")
+	}
+	sysBinderObj := new(SysBinder)
+	sysBinderObj.Bind(mc.container)
+}
 
+
+func (mc *moltenCore)bindRpcContainer(){
+	configNode := new(lib.BindNode)
+	configNode.Fill("config", mc.conf, nil, true, false)
+	bindRet := (*mc.rpcServer).(*rpcserver.RpcServerImp).Bind("config" , configNode)
+	if bindRet == false {
+		panic("bind http container config error")
+	}
+	sysBinderObj := new(SysBinder)
+	sysBinderObj.Bind((*mc.rpcServer).(*rpcserver.RpcServerImp).Container())
 }
 
 

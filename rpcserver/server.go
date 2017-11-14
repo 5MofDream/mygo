@@ -55,3 +55,10 @@ func (rs *RpcServerImp) LoadContainer() error {
 
 	return nil
 }
+
+func (rs *RpcServerImp) Bind(abstract string, node *lib.BindNode) bool {
+	return rs.container.Bind(abstract, node)
+}
+func (rs *RpcServerImp) Container() *lib.Container {
+	return rs.container
+}
