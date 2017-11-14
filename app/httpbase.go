@@ -1,8 +1,8 @@
 package app
 
 import (
-	"apollo/lib"
-	"apollo/moltencore"
+	"github.com/5MofDream/apollo/lib"
+	"github.com/5MofDream/apollo/moltencore"
 	"github.com/gin-gonic/gin"
 	"github.com/go-xorm/xorm"
 )

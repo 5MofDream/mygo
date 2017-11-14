@@ -1,8 +1,8 @@
 package moltencore
 
 import (
-	"apollo/lib"
-	"apollo/conf"
+	"github.com/5MofDream/apollo/lib"
+	"github.com/5MofDream/apollo/conf"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"fmt"
 	"github.com/jinzhu/gorm"

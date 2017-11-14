@@ -3,7 +3,7 @@ package rpcserver
 import (
 	"github.com/smallnest/rpcx/server"
 	"sync"
-	"apollo/lib"
+	"github.com/5MofDream/apollo/lib"
 )
 
 type RpcServer interface {

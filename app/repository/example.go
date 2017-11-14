@@ -1,6 +1,6 @@
 package repository
 
-import "apollo/app/models"
+import "github.com/5MofDream/apollo/app/models"
 
 type Example struct {
 	Base

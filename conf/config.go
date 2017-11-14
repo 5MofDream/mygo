@@ -3,10 +3,14 @@ package conf
 import (
 	"os"
 	"fmt"
-	"apollo/lib"
 	"io/ioutil"
 	"github.com/smallfish/simpleyaml"
 	"sync"
+
+
+
+	"github.com/5MofDream/apollo/lib"
+
 )
 
 //config path name

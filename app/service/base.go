@@ -1,7 +1,7 @@
 package service
 
 import (
-	"apollo/lib"
+	"github.com/5MofDream/apollo/lib"
 )
 
 type Base struct {

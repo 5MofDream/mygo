@@ -51,6 +51,6 @@ It is a  golang framework,Has rpc,http,tcp,queue...many widget!
 
     通过明文调用DI()实现 container的传递
 
-    
+
 
 

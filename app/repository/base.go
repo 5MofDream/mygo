@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"apollo/lib"
+	"github.com/5MofDream/apollo/lib"
 	"github.com/jinzhu/gorm"
 )
 

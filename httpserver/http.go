@@ -3,7 +3,7 @@ package httpserver
 import (
 	"sync"
 	"github.com/gin-gonic/gin"
-	"apollo/lib"
+	"github.com/5MofDream/apollo/lib"
 )
 
 type HttpServer interface {

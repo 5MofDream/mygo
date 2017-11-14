@@ -1,11 +1,11 @@
 package moltencore
 
 import (
-	"apollo/conf"
+	"github.com/5MofDream/apollo/conf"
 	"sync"
-	"apollo/httpserver"
-	"apollo/lib"
-	"apollo/rpcserver"
+	"github.com/5MofDream/apollo/httpserver"
+	"github.com/5MofDream/apollo/lib"
+	"github.com/5MofDream/apollo/rpcserver"
 	"flag"
 )
 

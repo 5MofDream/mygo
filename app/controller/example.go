@@ -1,10 +1,10 @@
 package controller
 
 import (
-	"apollo/app"
+	"github.com/5MofDream/apollo/app"
 	"github.com/gin-gonic/gin"
 	"github.com/jinzhu/gorm"
-	"apollo/app/service"
+	"github.com/5MofDream/apollo/app/service"
 )
 
 type ExampleController struct {

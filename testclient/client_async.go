@@ -5,7 +5,7 @@ import (
 	"flag"
 	"log"
 
-	example "apollo/rpcnodes"
+	example "github.com/5MofDream/apollo/rpcnodes"
 	"github.com/smallnest/rpcx/client"
 	"fmt"
 	"os"

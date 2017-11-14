@@ -2,8 +2,8 @@ package router
 
 import (
 	"github.com/gin-gonic/gin"
-	"apollo/moltencore"
-	"apollo/app/controller"
+	"github.com/5MofDream/apollo/moltencore"
+	"github.com/5MofDream/apollo/app/controller"
 )
 
 func init() {

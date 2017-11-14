@@ -3,11 +3,11 @@ package rpclient
 import (
 	"context"
 	"log"
-	"apollo/conf"
-	example "apollo/rpcnodes"
+	"github.com/5MofDream/apollo/conf"
+	example "github.com/5MofDream/apollo/rpcnodes"
 	"github.com/smallnest/rpcx/client"
-	"apollo/moltencore"
-	"apollo/lib"
+	"github.com/5MofDream/apollo/moltencore"
+	"github.com/5MofDream/apollo/lib"
 )
 
 var config *conf.ConfigImp

@@ -1,8 +1,8 @@
 package rpcrouter
 
 import (
-	"apollo/moltencore"
-	"apollo/rpcnodes"
+	"github.com/5MofDream/apollo/moltencore"
+	"github.com/5MofDream/apollo/rpcnodes"
 )
 
 func init() {

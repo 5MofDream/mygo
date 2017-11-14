@@ -1,8 +1,8 @@
 package service
 
 import (
-	"apollo/app/models"
-	"apollo/app/repository"
+	"github.com/5MofDream/apollo/app/models"
+	"github.com/5MofDream/apollo/app/repository"
 )
 
 type ExampleService struct {
